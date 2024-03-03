@@ -1,0 +1,41 @@
+import random
+import docx
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx import Document
+from docx.oxml import parse_xml
+x = 0
+y = 0
+v = 0
+i = 1
+s = 1
+col = 0
+sign = ["+", "*", "/", "-"]
+'''if dox_f.exists() == False:'''
+doc = Document()
+
+
+def exercises():
+    global x, y, v, i, p
+    while i < col:
+        x = random.randint(1, 100)
+        y = random.randint(1, 100)
+        omml_xml = '<p xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"><m:oMathPara><m:oMath><m:f><m:num><m:r><m:t>' + str(x) + '</m:t></m:r></m:num><m:den><m:r><m:t>' + str(y) + '</m:t></m:r></m:den></m:f></m:oMath></m:oMathPara></p>'
+        omml_el = parse_xml(omml_xml)[0]
+        p._p.append(omml_el)
+        if i == col-1:
+            new_fraction.add_run(' =')
+        else:
+            r_sign = random.choice(sign)
+            new_fraction.add_run(" "+ r_sign + " ")
+        i += 1
+
+while s != 31:
+    col = random.randint(3,11)
+    slova = 'Упражнение номер ' + str(s)
+    doc.add_paragraph(slova)
+    p = doc.add_paragraph()
+    new_fraction = p
+    exercises()
+    s +=1
+    i = 1
+doc.save('drobi.docx')
